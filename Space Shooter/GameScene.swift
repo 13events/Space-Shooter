@@ -14,33 +14,15 @@ class GameScene: SKScene {
     
     let motion = CMMotionManager()
     var timer = Timer()
+    var player: SKSpriteNode?
+    
+    let playerSpeed = 400
+    
     
     override func didMove(to view: SKView) {
-        if self.motion.isAccelerometerAvailable {
-            self.motion.accelerometerUpdateInterval = 1.0 / 60.0  // 60 Hz
-            self.motion.startAccelerometerUpdates()
-        }
-            
-            /*
-            // Configure a timer to fetch the data.
-            self.timer = Timer(fire: Date(), interval: (1.0/2.0),
-                               repeats: true, block: { (timer) in
-                                // Get the accelerometer data.
-                                if let data = self.motion.accelerometerData {
-                                    let x = data.acceleration.x
-                                    let y = data.acceleration.y
-                                    let z = data.acceleration.z
-                                    
-                                    // Use the accelerometer data in your app.
-                                    
-                                    print("X: \(x), Y: \(y), Z: \(z)")
-                                }
-            })
-            
-            // Add the timer to the current run loop.
-            RunLoop.current.add(self.timer, forMode: .defaultRunLoopMode)
-        } */
-        
+        SetupAccelerometer()
+        setupPlayer()
+     
     }
     
     
@@ -69,19 +51,51 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
+    fileprivate func SetupAccelerometer() {
+        if self.motion.isAccelerometerAvailable {
+            self.motion.accelerometerUpdateInterval = 1.0 / 60.0  // 60 Hz
+            self.motion.startAccelerometerUpdates()
+        }
+    }
     
-    override func update(_ currentTime: TimeInterval) {
+    fileprivate func getTilt() -> Double{
+        
+        guard let data = motion.accelerometerData else {return 0}
+        let x = data.acceleration.x
+        return x
+        
+    }
+    
+    fileprivate func getTilt() -> Float{
         // Called before each frame is rendered
         
-        if let data = self.motion.accelerometerData{
-            let x = data.acceleration.x
-            let y = data.acceleration.y
-            let z = data.acceleration.z
-            
-            print("X: \(x), Y: \(y), Z: \(z)")
-        }
+        guard let data = motion.accelerometerData else {return 0}
+        let x = data.acceleration.x
+        return Float(x)
         
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+     
+       updatePlayer()
         
+    }
+    
+    fileprivate func updatePlayer(){
+        let destinationX = (self.player?.position.x)! + CGFloat(getTilt() * Float(playerSpeed))
+        
+        let action = SKAction.moveTo(x: destinationX, duration: 0.25)
+        player?.run(action)
+        
+    }
+    
+    fileprivate func setupPlayer(){
+        
+         player = childNode(withName: "player") as? SKSpriteNode
+        
+        let xRange = SKRange(lowerLimit: -(self.view?.bounds.width)! / 2 - 60, upperLimit: (self.view?.bounds.width)! / 2 + 60)
+        
+        player?.constraints = [SKConstraint.positionX(xRange)]
         
     }
 }
