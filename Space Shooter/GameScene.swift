@@ -14,9 +14,8 @@ class GameScene: SKScene {
     
     let motion = CMMotionManager()
     var player: SKSpriteNode?
-    
     let playerSpeed = 1000
-    
+    var random = GKRandomDistribution.init(lowestValue: -375, highestValue: 375)
     
     override func didMove(to view: SKView) {
         SetupAccelerometer()
@@ -28,6 +27,9 @@ class GameScene: SKScene {
         print("Player size: \(player?.size.width)")
         print("View Bounds: \(view.bounds)")
         print("View Frame: \(view.frame)")
+        
+       
+        print("Random:\(random.nextInt())")
         
         
         
@@ -64,6 +66,7 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
      
        updatePlayer()
+        print("Random:\(random.nextInt())")
         
     }
     
