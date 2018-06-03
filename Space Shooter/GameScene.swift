@@ -15,11 +15,12 @@ class GameScene: SKScene {
     let motion = CMMotionManager()
     var player: SKSpriteNode?
     
-    let playerSpeed = 400
+    let playerSpeed = 1000
     
     
     override func didMove(to view: SKView) {
         SetupAccelerometer()
+        createEdgeLoop()
         setupPlayer()
         
         
@@ -85,7 +86,12 @@ class GameScene: SKScene {
         guard let data = motion.accelerometerData else {return 0}
         let x = data.acceleration.x
         return x
-        
+    }
+    
+    fileprivate func getTiltAsCGFloat() -> CGFloat{
+        guard let data = motion.accelerometerData else { return 0 }
+        let x = data.acceleration.x
+        return CGFloat(x)
     }
     
     /// Get x value from accelerometer as float
@@ -103,13 +109,20 @@ class GameScene: SKScene {
     
     /// Updates player movement
     fileprivate func updatePlayer(){
-        let destinationX = (self.player?.position.x)! + CGFloat(getTilt() * Float(playerSpeed))
+        
+        player?.physicsBody?.velocity = CGVector(dx: getTiltAsCGFloat() * CGFloat(playerSpeed), dy: 0)
+        
+        /*let destinationX = (self.player?.position.x)! + CGFloat(getTilt() * Float(playerSpeed))
         
         let action = SKAction.moveTo(x: destinationX, duration: 0.25)
         player?.run(action)
+         */
         
     }
     
+    func createEdgeLoop(){
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+    }
     
     /// Setup player sprite and sets constraints
     fileprivate func setupPlayer(){
@@ -120,7 +133,7 @@ class GameScene: SKScene {
         
         let xRange = SKRange(lowerLimit: -(self.view?.bounds.width)!  , upperLimit: (self.view?.bounds.width)! )
         
-        player?.constraints = [SKConstraint.positionX(xRange)]
+        //player?.constraints = [SKConstraint.positionX(xRange)]
         
         print("Range: \(xRange.lowerLimit), \(xRange.upperLimit)")
         
