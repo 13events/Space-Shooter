@@ -9,3 +9,7 @@
 import Foundation
 import SpriteKit
 
+struct physicsCategories {
+    static let Player: UInt32 = 0x1 << 0
+    static let Bounds: UInt32 = 0x1 << 1
+}

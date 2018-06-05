@@ -18,21 +18,19 @@ class GameScene: SKScene {
     var random = GKRandomDistribution.init(lowestValue: -375, highestValue: 375)
     
     override func didMove(to view: SKView) {
+        
         SetupAccelerometer()
         createEdgeLoop()
         setupPlayer()
         
         
-        print("Player Position: \(player?.position.x)")
-        print("Player size: \(player?.size.width)")
-        print("View Bounds: \(view.bounds)")
-        print("View Frame: \(view.frame)")
+        // print("Player Position: \(player?.position.x)")
+        // print("Player size: \(player?.size.width)")
+        // print("View Bounds: \(view.bounds)")
+        //print("View Frame: \(view.frame)")
         
        
         print("Random:\(random.nextInt())")
-        
-        
-        
         
     }
     
@@ -125,12 +123,18 @@ class GameScene: SKScene {
     
     func createEdgeLoop(){
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        
+        //set self physicsBody category to 'Bounds'
+        self.physicsBody?.categoryBitMask = physicsCategories.Bounds
     }
     
     /// Setup player sprite and sets constraints
     fileprivate func setupPlayer(){
         
-         player = childNode(withName: "player") as? SKSpriteNode
+        player = childNode(withName: "player") as? SKSpriteNode
+        
+        //set player physicsBody Collision mask to Bounds
+        player?.physicsBody?.collisionBitMask = physicsCategories.Bounds
         
         //print("Super View Bounds: \(view?.frame.width)")
         
@@ -141,4 +145,5 @@ class GameScene: SKScene {
         print("Range: \(xRange.lowerLimit), \(xRange.upperLimit)")
         
     }
+    
 }
