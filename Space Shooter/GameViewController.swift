@@ -15,6 +15,8 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             
@@ -30,7 +32,10 @@ class GameViewController: UIViewController {
             
             view.showsFPS = true
             view.showsNodeCount = true
+            
            // view.showsPhysics = true
+            
+          
         }
     }
 
@@ -46,6 +51,13 @@ class GameViewController: UIViewController {
         }
     }
 
+    override func viewDidLayoutSubviews() {
+        
+        
+//        print("Bottom Inset: \(view.safeAreaInsets.bottom)")
+//        print("Left Inset: \(view.safeAreaInsets.left)")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.

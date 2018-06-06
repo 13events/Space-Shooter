@@ -9,7 +9,18 @@
 import Foundation
 import SpriteKit
 
-struct physicsCategories {
-    static let Player: UInt32 = 0x1 << 0
-    static let Bounds: UInt32 = 0x1 << 1
+class PlayerShip : SKSpriteNode {
+    
+    let moveSpeed:CGFloat = 3000
+    
+    
+    func UpdatePosition(acceleration: CGFloat){
+     self.physicsBody?.velocity = CGVector(dx: acceleration * moveSpeed, dy: 0)
+    }
+    
+    func setupPhysics(){
+        self.physicsBody?.categoryBitMask = physicsCategories.Player
+        self.physicsBody?.collisionBitMask = physicsCategories.Bounds
+    }
+    
 }

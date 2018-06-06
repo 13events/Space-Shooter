@@ -13,9 +13,9 @@ import CoreMotion
 class GameScene: SKScene {
     
     let motion = CMMotionManager()
-    var player: SKSpriteNode?
     let playerSpeed = 1000
     var random = GKRandomDistribution.init(lowestValue: -375, highestValue: 375)
+    var playerShip: PlayerShip?
     
     override func didMove(to view: SKView) {
         
@@ -23,14 +23,10 @@ class GameScene: SKScene {
         createEdgeLoop()
         setupPlayer()
         
-        
         // print("Player Position: \(player?.position.x)")
         // print("Player size: \(player?.size.width)")
         // print("View Bounds: \(view.bounds)")
         //print("View Frame: \(view.frame)")
-        
-       
-        print("Random:\(random.nextInt())")
         
     }
     
@@ -63,8 +59,12 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
      
-       updatePlayer()
-        print("Random:\(random.nextInt())")
+        
+    }
+    
+    /// Update objects after physics haas been simulated
+    override func didSimulatePhysics() {
+        playerShip?.UpdatePosition(acceleration: getTiltAsCGFloat())
         
     }
     
@@ -108,41 +108,27 @@ class GameScene: SKScene {
     }
     
     
-    /// Updates player movement
-    fileprivate func updatePlayer(){
-        
-        player?.physicsBody?.velocity = CGVector(dx: getTiltAsCGFloat() * CGFloat(playerSpeed), dy: 0)
-        
-        /*let destinationX = (self.player?.position.x)! + CGFloat(getTilt() * Float(playerSpeed))
-        
-        let action = SKAction.moveTo(x: destinationX, duration: 0.25)
-        player?.run(action)
-         */
-        
-    }
-    
     func createEdgeLoop(){
+        
+        //create the edgelooop uisng size of frame
+        
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         
         //set self physicsBody category to 'Bounds'
         self.physicsBody?.categoryBitMask = physicsCategories.Bounds
+        self.physicsBody?.restitution = 0
     }
     
     /// Setup player sprite and sets constraints
     fileprivate func setupPlayer(){
         
-        player = childNode(withName: "player") as? SKSpriteNode
-        
-        //set player physicsBody Collision mask to Bounds
-        player?.physicsBody?.collisionBitMask = physicsCategories.Bounds
+        //get player node from SKS file
+        playerShip = childNode(withName: "player") as? PlayerShip
+        playerShip?.position = CGPoint(x: 0, y: -606)
+        playerShip?.setupPhysics()
         
         //print("Super View Bounds: \(view?.frame.width)")
-        
-        let xRange = SKRange(lowerLimit: -(self.view?.bounds.width)!  , upperLimit: (self.view?.bounds.width)! )
-        
-        //player?.constraints = [SKConstraint.positionX(xRange)]
-        
-        print("Range: \(xRange.lowerLimit), \(xRange.upperLimit)")
+       // print("Range: \(xRange.lowerLimit), \(xRange.upperLimit)")
         
     }
     
