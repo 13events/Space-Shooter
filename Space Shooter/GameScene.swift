@@ -10,43 +10,30 @@ import SpriteKit
 import GameplayKit
 import CoreMotion
 
+
 class GameScene: SKScene {
-    
+
     let motion = CMMotionManager()
-    let playerSpeed = 1000
+    let playerSpeed = 600
     var random = GKRandomDistribution.init(lowestValue: -375, highestValue: 375)
     var playerShip: PlayerShip?
     
     override func didMove(to view: SKView) {
-        
+       
         SetupAccelerometer()
         createEdgeLoop()
         setupPlayer()
-        
-        // print("Player Position: \(player?.position.x)")
-        // print("Player size: \(player?.size.width)")
-        // print("View Bounds: \(view.bounds)")
-        //print("View Frame: \(view.frame)")
         
     }
     
     //MARK: Handle Touch
     
-    func touchDown(atPoint pos : CGPoint) {
-       
-    }
     
-    func touchMoved(toPoint pos : CGPoint) {
-       
-    }
     
-    func touchUp(atPoint pos : CGPoint) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-      
-    }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
@@ -67,7 +54,6 @@ class GameScene: SKScene {
         playerShip?.UpdatePosition(acceleration: getTiltAsCGFloat())
         
     }
-    
     
     //MARK:
     
@@ -112,8 +98,8 @@ class GameScene: SKScene {
         
         //create the edgelooop uisng size of frame
         
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+
         //set self physicsBody category to 'Bounds'
         self.physicsBody?.categoryBitMask = physicsCategories.Bounds
         self.physicsBody?.restitution = 0
@@ -127,8 +113,7 @@ class GameScene: SKScene {
         playerShip?.position = CGPoint(x: 0, y: -606)
         playerShip?.setupPhysics()
         
-        //print("Super View Bounds: \(view?.frame.width)")
-       // print("Range: \(xRange.lowerLimit), \(xRange.upperLimit)")
+        
         
     }
     
