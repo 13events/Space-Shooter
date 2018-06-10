@@ -15,6 +15,9 @@ let rightEdge = CGFloat(260)
 class PlayerShip : SKSpriteNode {
     
     let moveSpeed:CGFloat = 3000
+    let weaponTexture = SKTexture(imageNamed: "weapon.png")
+    
+    
     
     
     func UpdatePosition(acceleration: CGFloat){
@@ -34,11 +37,15 @@ class PlayerShip : SKSpriteNode {
             self.physicsBody?.node?.position.x = rightEdge
         }
         
+        
+        
     }
     
+    
+    
     func setupPhysics(){
-        self.physicsBody?.categoryBitMask = physicsCategories.Player
-        self.physicsBody?.collisionBitMask = physicsCategories.Bounds
+        self.physicsBody?.categoryBitMask = physicsCategories.player
+        self.physicsBody?.collisionBitMask = physicsCategories.bounds
     }
     
 }

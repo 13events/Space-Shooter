@@ -11,18 +11,21 @@ import GameplayKit
 import CoreMotion
 
 
-class GameScene: SKScene {
+class GameScene: SKScene,  SKPhysicsContactDelegate {
 
     let motion = CMMotionManager()
-    let playerSpeed = 600
+    let playerSpeed = 400
     var random = GKRandomDistribution.init(lowestValue: -375, highestValue: 375)
     var playerShip: PlayerShip?
+    let weaponTexture = SKTexture(imageNamed: "weapon.png")
+    var weapons = [PlayerWeapon]()
     
     override func didMove(to view: SKView) {
        
         SetupAccelerometer()
         createEdgeLoop()
         setupPlayer()
+        physicsWorld.contactDelegate = self
         
     }
     
@@ -31,6 +34,18 @@ class GameScene: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+   
+        
+        createBullet()
+        /*
+        let playerWeapon:PlayerWeapon = PlayerWeapon(texture: weaponTexture)
+        playerWeapon.setupPhysics()
+        
+        playerWeapon.position.x = (playerShip?.position.x)!
+        playerWeapon.position.y = (playerShip?.position.y)!
+        playerWeapon.updatePosition()
+        addChild(playerWeapon)
+        */
         
     }
     
@@ -51,7 +66,15 @@ class GameScene: SKScene {
     
     /// Update objects after physics haas been simulated
     override func didSimulatePhysics() {
+        
+        
         playerShip?.UpdatePosition(acceleration: getTiltAsCGFloat())
+        
+        for bullets in weapons{
+            if let bullet = bullets as? PlayerWeapon{
+                bullet.updatePosition()
+            }
+        }
         
     }
     
@@ -101,7 +124,7 @@ class GameScene: SKScene {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
 
         //set self physicsBody category to 'Bounds'
-        self.physicsBody?.categoryBitMask = physicsCategories.Bounds
+        self.physicsBody?.categoryBitMask = physicsCategories.bounds
         self.physicsBody?.restitution = 0
     }
     
@@ -112,9 +135,44 @@ class GameScene: SKScene {
         playerShip = childNode(withName: "player") as? PlayerShip
         playerShip?.position = CGPoint(x: 0, y: -606)
         playerShip?.setupPhysics()
-        
-        
+    
         
     }
+    
+    func createBullet(){
+        let bullet = PlayerWeapon(texture: weaponTexture)
+        bullet.setupPhysics()
+        bullet.position = (playerShip?.position)!
+        bullet.position.y += 34
+        weapons.append(bullet)
+        addChild(bullet)
+    }
+    
+     func didBegin(_ contact: SKPhysicsContact) {
+       
+        //seperate physic bodies
+        var firstBody: SKPhysicsBody
+        var secondBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        //resolve collision
+        if ((firstBody.categoryBitMask & physicsCategories.playerWeapon != 0) && (secondBody.categoryBitMask & physicsCategories.bounds != 0)){
+            print("Ball Bounds Collision")
+        } else if ((firstBody.categoryBitMask & physicsCategories.bounds != 0 && (secondBody.categoryBitMask & physicsCategories.playerWeapon != 0))) {
+            print("Bounds Ball Collision")
+            let weapon = secondBody.node as? PlayerWeapon
+            weapon?.removeFromParent()
+            print("Removed weapon from screen.")
+        }
+        
+    }
+    
     
 }

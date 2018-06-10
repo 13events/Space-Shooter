@@ -10,6 +10,7 @@ import Foundation
 
 
 struct physicsCategories {
-    static let Player: UInt32 = 0x1 << 0
-    static let Bounds: UInt32 = 0x1 << 1
+    static let player: UInt32 = 0x1 << 0
+    static let bounds: UInt32 = 0x1 << 1
+    static let playerWeapon: UInt32 = 0x1 << 3
 }

@@ -15,6 +15,7 @@
 		82AFE41820BBFC3B00D63569 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82AFE41620BBFC3B00D63569 /* Main.storyboard */; };
 		82AFE41A20BBFC3C00D63569 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82AFE41920BBFC3C00D63569 /* Assets.xcassets */; };
 		82AFE41D20BBFC3C00D63569 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82AFE41B20BBFC3C00D63569 /* LaunchScreen.storyboard */; };
+		82BEE61B20CB4328006CDC07 /* PlayerWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */; };
 		82CE8CB020C1E239005CFE44 /* PlayerShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE8CAF20C1E239005CFE44 /* PlayerShip.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		82AFE41920BBFC3C00D63569 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82AFE41C20BBFC3C00D63569 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82AFE41E20BBFC3C00D63569 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWeapon.swift; sourceTree = "<group>"; };
 		82CE8CAF20C1E239005CFE44 /* PlayerShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerShip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 				82AFE41E20BBFC3C00D63569 /* Info.plist */,
 				82CE8CAF20C1E239005CFE44 /* PlayerShip.swift */,
 				8251630820C7D74100A8E5F4 /* PhysicsCategories.swift */,
+				82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */,
 			);
 			path = "Space Shooter";
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				82CE8CB020C1E239005CFE44 /* PlayerShip.swift in Sources */,
 				82AFE41320BBFC3B00D63569 /* GameScene.swift in Sources */,
 				82AFE41520BBFC3B00D63569 /* GameViewController.swift in Sources */,
+				82BEE61B20CB4328006CDC07 /* PlayerWeapon.swift in Sources */,
 				82AFE40D20BBFC3B00D63569 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
