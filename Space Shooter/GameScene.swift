@@ -35,8 +35,12 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
    
+        let bullet = PlayerWeapon(scene: self, texture: weaponTexture, collection: &weapons)
+        bullet.position = (playerShip?.position)!
+        bullet.position.y += 34
+       // weapons.append(bullet)
         
-        createBullet()
+        //createBullet()
         /*
         let playerWeapon:PlayerWeapon = PlayerWeapon(texture: weaponTexture)
         playerWeapon.setupPhysics()
@@ -70,7 +74,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         
         playerShip?.UpdatePosition(acceleration: getTiltAsCGFloat())
         
-        for bullets in weapons{
+        for bullets in children{
             if let bullet = bullets as? PlayerWeapon{
                 bullet.updatePosition()
             }
@@ -140,11 +144,11 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     }
     
     func createBullet(){
-        let bullet = PlayerWeapon(texture: weaponTexture)
+        let bullet = PlayerWeapon(scene: self, texture: weaponTexture, collection: &weapons)
         bullet.setupPhysics()
         bullet.position = (playerShip?.position)!
         bullet.position.y += 34
-        weapons.append(bullet)
+      //  weapons.append(bullet)
         addChild(bullet)
     }
     
@@ -170,7 +174,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
             let weapon = secondBody.node as? PlayerWeapon
             weapon?.removeFromParent()
             print("Removed weapon from screen.")
-        }
+                    }
         
     }
     

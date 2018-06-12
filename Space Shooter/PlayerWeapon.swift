@@ -12,6 +12,15 @@ class PlayerWeapon: SKSpriteNode {
 
     let weaponSpeed: CGFloat = 900
     
+    init(scene: GameScene, texture: SKTexture, collection: inout  [PlayerWeapon]){
+        super.init(texture: texture, color: UIColor.white, size: texture.size())
+        self.setupPhysics()
+       // collection.append(self)
+        scene.addChild(self)
+        
+    }
+    
+    
     func updatePosition(){
         self.physicsBody?.velocity = CGVector(dx: 0, dy: weaponSpeed)
         
@@ -25,4 +34,7 @@ class PlayerWeapon: SKSpriteNode {
         self.physicsBody?.contactTestBitMask = physicsCategories.bounds //notify of intersections with the bounds
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
