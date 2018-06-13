@@ -15,7 +15,7 @@ class PlayerWeapon: SKSpriteNode {
     init(scene: GameScene, texture: SKTexture, collection: inout  [PlayerWeapon]){
         super.init(texture: texture, color: UIColor.white, size: texture.size())
         self.setupPhysics()
-       // collection.append(self)
+        //collection.append(self)
         scene.addChild(self)
         
     }
