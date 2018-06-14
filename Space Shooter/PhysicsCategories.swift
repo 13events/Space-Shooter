@@ -9,6 +9,9 @@
 import Foundation
 
 
+/// Structure holding bit values used for physics
+/// Values include:
+/// player, bounds, playerWeapon
 struct physicsCategories {
     static let player: UInt32 = 0x1 << 0
     static let bounds: UInt32 = 0x1 << 1

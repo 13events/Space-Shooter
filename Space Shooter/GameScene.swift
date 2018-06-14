@@ -15,41 +15,26 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
 
     let motion = CMMotionManager()
     let playerSpeed = 400
-    var random = GKRandomDistribution.init(lowestValue: -375, highestValue: 375)
     var playerShip: PlayerShip?
     let weaponTexture = SKTexture(imageNamed: "weapon.png")
-    var weapons = [PlayerWeapon]()
+    var weapons = [PlayerWeapon]()      //TODO: Change functions to not use this array so we can remove it
     
     override func didMove(to view: SKView) {
        
         SetupAccelerometer()
         createEdgeLoop()
         setupPlayer()
-        physicsWorld.contactDelegate = self
+        physicsWorld.contactDelegate = self  //used in physics callbacks
         
     }
     
     //MARK: Handle Touch
     
-    
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
    
         let bullet = PlayerWeapon(scene: self, texture: weaponTexture, collection: &weapons)
         bullet.position = (playerShip?.position)!
-        bullet.position.y += 34
-       // weapons.append(bullet)
-        
-        //createBullet()
-        /*
-        let playerWeapon:PlayerWeapon = PlayerWeapon(texture: weaponTexture)
-        playerWeapon.setupPhysics()
-        
-        playerWeapon.position.x = (playerShip?.position.x)!
-        playerWeapon.position.y = (playerShip?.position.y)!
-        playerWeapon.updatePosition()
-        addChild(playerWeapon)
-        */
+        bullet.position.y += 34     //make this value into a constant or something, NO MAGiC NUMBERS!
         
     }
     
@@ -74,12 +59,13 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         
         updateSprites()
         
+        /***** Move this section into updateSprites() *****/
         for bullets in children{
             if let bullet = bullets as? PlayerWeapon{
                 bullet.updatePosition()
             }
         }
-        
+        /**************************************************/
     }
     
     //MARK:
@@ -121,6 +107,9 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     }
     
     
+    /// Creates the physics edgeloop that keeps things inside the frame
+    /// TODO: Change height of loop to extent above screen, important when
+    /// spawning hazards
     func createEdgeLoop(){
         
         //create the edgelooop uisng size of frame
@@ -133,34 +122,39 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     }
     
     /// Setup player sprite and sets constraints
-    
     fileprivate func setupPlayer(){
-        
-        //get player node from SKS file
-       // playerShip = childNode(withName: "player") as? PlayerShip
+    
         playerShip = PlayerShip(scene: self)
-       // playerShip?.position = CGPoint(x: 0, y: -606)
-        //playerShip?.setupPhysics()
+       
     }
  
+    /// Handles calling the correct update function for each childNode in the scene.
     func updateSprites(){
+        
         for child in children {
             if let node = child as? PlayerShip{
                 node.UpdatePosition(acceleration: getTiltAsCGFloat())
             }
+        }
         
     }
     
+    /// Create a Bullet object
+    /// # TODO:
+    /// Change this to accept arguments such as:
+    /// weapon textures, player/enemy spawn location, travel direction(up/down)
     func createBullet(){
         let bullet = PlayerWeapon(scene: self, texture: weaponTexture, collection: &weapons)
         bullet.setupPhysics()
         bullet.position = (playerShip?.position)!
         bullet.position.y += 34
-      //  weapons.append(bullet)
         addChild(bullet)
     }
     
-     func didBegin(_ contact: SKPhysicsContact) {
+    /// Handles physics collisions that have begun
+    /// # TODO:
+    /// THIS COULD BE CLEANRED UP!
+    func didBegin(_ contact: SKPhysicsContact) {
        
         //seperate physic bodies
         var firstBody: SKPhysicsBody
@@ -174,7 +168,8 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
-        //resolve collision
+        /// resolve collision
+        
         if ((firstBody.categoryBitMask & physicsCategories.playerWeapon != 0) && (secondBody.categoryBitMask & physicsCategories.bounds != 0)){
             print("Ball Bounds Collision")
         } else if ((firstBody.categoryBitMask & physicsCategories.bounds != 0 && (secondBody.categoryBitMask & physicsCategories.playerWeapon != 0))) {
