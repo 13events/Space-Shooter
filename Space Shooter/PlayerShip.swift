@@ -56,12 +56,7 @@ class PlayerShip : SKSpriteNode {
             self.position.x = rightEdge
             self.physicsBody?.node?.position.x = rightEdge
         }
-        
-        
-        
     }
-    
-    
     
     /// setup physic properties of the weapon sprite
     func setupPhysics(){
