@@ -70,9 +70,9 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     
     /// Update objects after physics haas been simulated
     override func didSimulatePhysics() {
+       // playerShip?.UpdatePosition(acceleration: getTiltAsCGFloat())
         
-        
-        playerShip?.UpdatePosition(acceleration: getTiltAsCGFloat())
+        updateSprites()
         
         for bullets in children{
             if let bullet = bullets as? PlayerWeapon{
@@ -133,13 +133,21 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     }
     
     /// Setup player sprite and sets constraints
+    
     fileprivate func setupPlayer(){
         
         //get player node from SKS file
-        playerShip = childNode(withName: "player") as? PlayerShip
-        playerShip?.position = CGPoint(x: 0, y: -606)
-        playerShip?.setupPhysics()
-    
+       // playerShip = childNode(withName: "player") as? PlayerShip
+        playerShip = PlayerShip(scene: self)
+       // playerShip?.position = CGPoint(x: 0, y: -606)
+        //playerShip?.setupPhysics()
+    }
+ 
+    func updateSprites(){
+        for child in children {
+            if let node = child as? PlayerShip{
+                node.UpdatePosition(acceleration: getTiltAsCGFloat())
+            }
         
     }
     
