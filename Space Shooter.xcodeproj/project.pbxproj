@@ -64,11 +64,11 @@
 		82AFE40B20BBFC3B00D63569 /* Space Shooter */ = {
 			isa = PBXGroup;
 			children = (
+				97E96AAA20D1ECA5001D6F5A /* Scenes */,
 				82AFE40C20BBFC3B00D63569 /* AppDelegate.swift */,
 				82AFE41420BBFC3B00D63569 /* GameViewController.swift */,
 				82AFE41220BBFC3B00D63569 /* GameScene.swift */,
 				82AFE41620BBFC3B00D63569 /* Main.storyboard */,
-				82AFE40E20BBFC3B00D63569 /* GameScene.sks */,
 				82AFE41920BBFC3C00D63569 /* Assets.xcassets */,
 				82AFE41B20BBFC3C00D63569 /* LaunchScreen.storyboard */,
 				82AFE41E20BBFC3C00D63569 /* Info.plist */,
@@ -77,6 +77,14 @@
 				82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */,
 			);
 			path = "Space Shooter";
+			sourceTree = "<group>";
+		};
+		97E96AAA20D1ECA5001D6F5A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				82AFE40E20BBFC3B00D63569 /* GameScene.sks */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
