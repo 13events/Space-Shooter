@@ -18,7 +18,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     var playerShip: PlayerShip?
     let weaponTexture = SKTexture(imageNamed: "weapon.png")
     var weapons = [PlayerWeapon]()      //TODO: Change functions to not use this array so we can remove it
-    
+    var hazards = [Hazard]()
     override func didMove(to view: SKView) {
        
         SetupAccelerometer()
@@ -32,6 +32,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
    
+        /****  Make this into a function?  *****/
         let bullet = PlayerWeapon(scene: self, texture: weaponTexture, collection: &weapons)
         bullet.position = (playerShip?.position)!
         bullet.position.y += 34     //make this value into a constant or something, NO MAGiC NUMBERS!

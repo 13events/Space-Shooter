@@ -44,8 +44,9 @@ class PlayerWeapon: SKSpriteNode {
     func setupPhysics(){
         
         self.physicsBody = SKPhysicsBody(circleOfRadius: max(self.size.width / 2 , self.size.height / 2 ))
+        self.physicsBody?.affectedByGravity = false
         self.physicsBody?.categoryBitMask = physicsCategories.playerWeapon
-        self.physicsBody?.collisionBitMask = 0
+        self.physicsBody?.collisionBitMask = physicsCategories.none
         self.physicsBody?.contactTestBitMask = physicsCategories.bounds //notify of intersections with the bounds
     }
     

@@ -17,6 +17,7 @@
 		82AFE41D20BBFC3C00D63569 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82AFE41B20BBFC3C00D63569 /* LaunchScreen.storyboard */; };
 		82BEE61B20CB4328006CDC07 /* PlayerWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */; };
 		82CE8CB020C1E239005CFE44 /* PlayerShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE8CAF20C1E239005CFE44 /* PlayerShip.swift */; };
+		9718EDBC20D34D540094435E /* Hazard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718EDBB20D34D540094435E /* Hazard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		82AFE41E20BBFC3C00D63569 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWeapon.swift; sourceTree = "<group>"; };
 		82CE8CAF20C1E239005CFE44 /* PlayerShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerShip.swift; sourceTree = "<group>"; };
+		9718EDBB20D34D540094435E /* Hazard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hazard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				82AFE41920BBFC3C00D63569 /* Assets.xcassets */,
 				82AFE41B20BBFC3C00D63569 /* LaunchScreen.storyboard */,
 				82AFE41E20BBFC3C00D63569 /* Info.plist */,
+				9718EDBB20D34D540094435E /* Hazard.swift */,
 				82CE8CAF20C1E239005CFE44 /* PlayerShip.swift */,
 				8251630820C7D74100A8E5F4 /* PhysicsCategories.swift */,
 				82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */,
@@ -162,6 +165,7 @@
 				8251630920C7D74100A8E5F4 /* PhysicsCategories.swift in Sources */,
 				82CE8CB020C1E239005CFE44 /* PlayerShip.swift in Sources */,
 				82AFE41320BBFC3B00D63569 /* GameScene.swift in Sources */,
+				9718EDBC20D34D540094435E /* Hazard.swift in Sources */,
 				82AFE41520BBFC3B00D63569 /* GameViewController.swift in Sources */,
 				82BEE61B20CB4328006CDC07 /* PlayerWeapon.swift in Sources */,
 				82AFE40D20BBFC3B00D63569 /* AppDelegate.swift in Sources */,
