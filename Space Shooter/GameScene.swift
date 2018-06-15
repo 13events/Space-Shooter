@@ -112,9 +112,15 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     /// spawning hazards
     func createEdgeLoop(){
         
-        //create the edgelooop uisng size of frame
+        //make bounds taller than screen, so we have room to spawn our hazards.
+        let physicsBounds = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: frame.height + CGFloat(400))
         
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        //create the edgelooop uisng size of frame
+        print("Frame Width: \(frame.width)")
+        print("Frame Height: \(frame.height)")
+            
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: physicsBounds)
+       // self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
 
         //set self physicsBody category to 'Bounds'
         self.physicsBody?.categoryBitMask = physicsCategories.bounds
