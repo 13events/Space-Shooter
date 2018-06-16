@@ -17,6 +17,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     let playerSpeed = 400
     var playerShip: PlayerShip?
     let weaponTexture = SKTexture(imageNamed: "weapon.png")
+    let asteroid01Texture = SKTexture(imageNamed: "Asteroid01.png")
     var weapons = [PlayerWeapon]()      //TODO: Change functions to not use this array so we can remove it
     var hazards = [Hazard]()
     override func didMove(to view: SKView) {
@@ -26,9 +27,13 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         setupPlayer()
         physicsWorld.contactDelegate = self  //used in physics callbacks
         
+        //create a hazard
+        let hazard = Hazard(scene: self, texture: asteroid01Texture, hazardsCollection: &hazards)
+        
+        
     }
     
-    //MARK: Handle Touch
+    //MARKL: Handle touch
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
    
@@ -59,7 +64,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
        // playerShip?.UpdatePosition(acceleration: getTiltAsCGFloat())
         
         updateSprites()
-        
+        /*********** UPDATE BULLET SPRITES ****************/
         /***** Move this section into updateSprites() *****/
         for bullets in children{
             if let bullet = bullets as? PlayerWeapon{
@@ -67,6 +72,14 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
             }
         }
         /**************************************************/
+        /*************** UPDATE HAZARDS POSITION **********/
+        for node in children{
+            if let hazard = node as? Hazard{
+                hazard.updatePosition()
+            }
+        }
+        
+        
     }
     
     //MARK:
