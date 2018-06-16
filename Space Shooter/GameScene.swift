@@ -18,8 +18,9 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     var playerShip: PlayerShip?
     let weaponTexture = SKTexture(imageNamed: "weapon.png")
     let asteroid01Texture = SKTexture(imageNamed: "Asteroid01.png")
-    var weapons = [PlayerWeapon]()      //TODO: Change functions to not use this array so we can remove it
-    var hazards = [Hazard]()
+    var weapons = [PlayerWeapon]()      //TODO: Change functions to not use this array so we can remove it.
+    var hazards = [Hazard]()            //TODO: Change functions to not use this array so we can remove it.
+   
     override func didMove(to view: SKView) {
        
         SetupAccelerometer()
@@ -28,13 +29,14 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self  //used in physics callbacks
         
         //create a hazard
-        let hazard = Hazard(scene: self, texture: asteroid01Texture, hazardsCollection: &hazards)
+        _ = Hazard(scene: self, texture: asteroid01Texture, hazardsCollection: &hazards)
         
         
     }
     
     //MARKL: Handle touch
     
+    //TODO: Code spawns shot even when player is removed from scene
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
    
         /****  Make this into a function?  *****/
@@ -64,6 +66,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
        // playerShip?.UpdatePosition(acceleration: getTiltAsCGFloat())
         
         updateSprites()
+        
         /*********** UPDATE BULLET SPRITES ****************/
         /***** Move this section into updateSprites() *****/
         for bullets in children{
@@ -190,14 +193,38 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         
         /// resolve collision
         
-        if ((firstBody.categoryBitMask & physicsCategories.playerWeapon != 0) && (secondBody.categoryBitMask & physicsCategories.bounds != 0)){
-            print("Ball Bounds Collision")
-        } else if ((firstBody.categoryBitMask & physicsCategories.bounds != 0 && (secondBody.categoryBitMask & physicsCategories.playerWeapon != 0))) {
+        //check ball/bouncs collision
+        if ((firstBody.categoryBitMask & physicsCategories.bounds != 0 && (secondBody.categoryBitMask & physicsCategories.playerWeapon != 0))) {
             print("Bounds Ball Collision")
             let weapon = secondBody.node as? PlayerWeapon
             weapon?.removeFromParent()
             print("Removed weapon from screen.")
-                    }
+            
+            //check hazard/bounds collision
+        } else if ((firstBody.categoryBitMask & physicsCategories.bounds != 0 && (secondBody.categoryBitMask & physicsCategories.hazard != 0))){
+             print("Asteroid and Physics Bounds contact")
+            if let hazard = secondBody.node as? Hazard{
+                hazard.removeFromParent()
+            }
+            
+            //check hazard/weapon collision
+        } else if ((firstBody.categoryBitMask & physicsCategories.playerWeapon != 0 && (secondBody.categoryBitMask & physicsCategories.hazard != 0))){
+            print("Weapon and Asteroid collision")
+            if let player = firstBody.node as? PlayerWeapon, let hazard = secondBody.node as? Hazard{
+                player.removeFromParent()
+                hazard.removeFromParent()
+            }
+            
+            //check player/hazard collision
+        } else if ((firstBody.categoryBitMask & physicsCategories.player != 0 && (secondBody.categoryBitMask &
+            physicsCategories.hazard != 0))){
+            print("Hazard/Player collision")
+            if let player = firstBody.node as? PlayerShip, let hazard = secondBody.node as? Hazard{
+                player.removeFromParent()
+                hazard.removeFromParent()
+            }
+            
+        }
         
     }
     

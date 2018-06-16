@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Space Shooter/GameScene.swift"
-            timestampString = "550718538.353315"
+            timestampString = "550827923.190179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "163"
             endingLineNumber = "163"
-            landmarkName = "didBegin(_:)"
+            landmarkName = "updateSprites()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
