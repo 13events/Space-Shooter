@@ -34,7 +34,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         
     }
     
-    //MARKL: Handle touch
+    //MARK: Handle touch
     
     //TODO: Code spawns shot even when player is removed from scene
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -45,7 +45,6 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         bullet.position.y += 34     //make this value into a constant or something, NO MAGiC NUMBERS!
         
     }
-    
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
@@ -100,6 +99,27 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         
     }
     
+    /// Creates the physics edgeloop that keeps things inside the frame
+    /// TODO: Change height of loop to extend below screen, important when
+    /// spawning hazards
+    func setupPhysicsBounds(){
+        
+        //make bounds taller than screen, so we have room to spawn our hazards.
+        let physicsBounds = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: frame.height + CGFloat(400))
+        
+        //create the edgelooop uisng size of frame
+        print("Frame Width: \(frame.width)")
+        print("Frame Height: \(frame.height)")
+        
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: physicsBounds)
+        // self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        
+        //set self physicsBody category to 'Bounds'
+        self.physicsBody?.categoryBitMask = physicsCategories.bounds
+        self.physicsBody?.restitution = 0
+    }
+    
+    //MARK: Helper Functions
     /// Get x value from accelerometer
     ///
     /// - Returns: Returns a Double representing the tilt of accelerometer in the x-axis
@@ -128,27 +148,6 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         
     }
     
-    
-    /// Creates the physics edgeloop that keeps things inside the frame
-    /// TODO: Change height of loop to extend below screen, important when
-    /// spawning hazards
-    func setupPhysicsBounds(){
-        
-        //make bounds taller than screen, so we have room to spawn our hazards.
-        let physicsBounds = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: frame.height + CGFloat(400))
-        
-        //create the edgelooop uisng size of frame
-        print("Frame Width: \(frame.width)")
-        print("Frame Height: \(frame.height)")
-            
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: physicsBounds)
-       // self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-
-        //set self physicsBody category to 'Bounds'
-        self.physicsBody?.categoryBitMask = physicsCategories.bounds
-        self.physicsBody?.restitution = 0
-    }
-    
     /// Create a Bullet object
     /// # TODO:
     /// Change this to accept arguments such as:
@@ -160,6 +159,9 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         bullet.position.y += 34
         addChild(bullet)
     }
+    
+    
+    //MARK: Physics Delegate
     
     /// Handles physics collisions that have begun
     /// # TODO:
