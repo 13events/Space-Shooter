@@ -24,7 +24,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
        
         SetupAccelerometer()
-        createEdgeLoop()
+        setupPhysicsBounds()
         setupPlayer()
         physicsWorld.contactDelegate = self  //used in physics callbacks
         
@@ -56,36 +56,34 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
+    //MARK: Updata Functions
     override func update(_ currentTime: TimeInterval) {
-     
+     updateSprites()
         
     }
     
-    /// Update objects after physics haas been simulated
-    override func didSimulatePhysics() {
-       // playerShip?.UpdatePosition(acceleration: getTiltAsCGFloat())
-        
-        updateSprites()
-        
-        /*********** UPDATE BULLET SPRITES ****************/
-        /***** Move this section into updateSprites() *****/
-        for bullets in children{
-            if let bullet = bullets as? PlayerWeapon{
+    /// Handles calling the correct update function for each childNode in the scene.
+    func updateSprites(){
+    
+        for node in children {
+            //check player
+            if let player = node as? PlayerShip{
+                player.UpdatePosition(acceleration: getTiltAsCGFloat())
+            }
+            //check bullets
+            if let bullet = node as? PlayerWeapon{
                 bullet.updatePosition()
             }
-        }
-        /**************************************************/
-        /*************** UPDATE HAZARDS POSITION **********/
-        for node in children{
+            //check hazards
             if let hazard = node as? Hazard{
                 hazard.updatePosition()
             }
         }
         
-        
     }
     
-    //MARK:
+    
+    //MARK: Setup Functions
     
     /// Set up accelerometer and update interval
     fileprivate func SetupAccelerometer() {
@@ -93,6 +91,13 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
             self.motion.accelerometerUpdateInterval = 1.0 / 60.0  // 60 Hz
             self.motion.startAccelerometerUpdates()
         }
+    }
+    
+    /// Setup player sprite
+    fileprivate func setupPlayer(){
+        
+        playerShip = PlayerShip(scene: self)
+        
     }
     
     /// Get x value from accelerometer
@@ -125,9 +130,9 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     
     
     /// Creates the physics edgeloop that keeps things inside the frame
-    /// TODO: Change height of loop to extent above screen, important when
+    /// TODO: Change height of loop to extend below screen, important when
     /// spawning hazards
-    func createEdgeLoop(){
+    func setupPhysicsBounds(){
         
         //make bounds taller than screen, so we have room to spawn our hazards.
         let physicsBounds = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: frame.height + CGFloat(400))
@@ -142,24 +147,6 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         //set self physicsBody category to 'Bounds'
         self.physicsBody?.categoryBitMask = physicsCategories.bounds
         self.physicsBody?.restitution = 0
-    }
-    
-    /// Setup player sprite and sets constraints
-    fileprivate func setupPlayer(){
-    
-        playerShip = PlayerShip(scene: self)
-       
-    }
- 
-    /// Handles calling the correct update function for each childNode in the scene.
-    func updateSprites(){
-        
-        for child in children {
-            if let node = child as? PlayerShip{
-                node.UpdatePosition(acceleration: getTiltAsCGFloat())
-            }
-        }
-        
     }
     
     /// Create a Bullet object
