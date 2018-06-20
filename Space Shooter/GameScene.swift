@@ -14,6 +14,7 @@ import CoreMotion
 class GameScene: SKScene,  SKPhysicsContactDelegate {
 
     let motion = CMMotionManager()
+    let kLockWeaponActionKey = "kLockWeaponActionKey"
     let playerSpeed = 400
     var playerShip: PlayerShip?
     let weaponTexture = SKTexture(imageNamed: "weapon.png")
@@ -38,12 +39,14 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     
     //TODO: Code spawns shot even when player is removed from scene
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-   
+        
+        shoot(scene: self, texture: weaponTexture, collection: &weapons, duration: 0.5)
+        /*
         /****  Make this into a function?  *****/
         let bullet = PlayerWeapon(scene: self, texture: weaponTexture, collection: &weapons)
         bullet.position = (playerShip?.position)!
         bullet.position.y += 34     //make this value into a constant or something, NO MAGiC NUMBERS!
-        
+        */
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -152,12 +155,25 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     /// # TODO:
     /// Change this to accept arguments such as:
     /// weapon textures, player/enemy spawn location, travel direction(up/down)
-    func createBullet(){
-        let bullet = PlayerWeapon(scene: self, texture: weaponTexture, collection: &weapons)
-        bullet.setupPhysics()
+    func shoot(scene: GameScene, texture: SKTexture, collection: inout [PlayerWeapon], duration: Double){
+        
+        //check if weapon is locked
+        guard self.action(forKey: kLockWeaponActionKey) == nil else {
+            print("Weapon Locked!")
+            return
+        }
+        
+        //Bullet setup
+        let bullet = PlayerWeapon(scene: scene, texture: texture, collection: &collection)
+       // bullet.setupPhysics()
         bullet.position = (playerShip?.position)!
         bullet.position.y += 34
-        addChild(bullet)
+        //addChild(bullet)
+        
+        //lock weapon
+        self.run(SKAction.wait(forDuration: duration),withKey: kLockWeaponActionKey)
+        
+        
     }
     
     
