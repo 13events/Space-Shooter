@@ -35,6 +35,18 @@ class Hazard: SKSpriteNode {
         
     }
     
+    convenience init(scene: GameScene, texture: SKTexture){
+        self.init(texture: texture, color: UIColor.white, size: texture.size())
+        
+        setupPhysics()
+        //set spawn point
+        setSpawnPoint(scene: scene)
+        //add to hazardsCollection**
+        //add to scene
+        scene.addChild(self)
+        
+    }
+    
     /// Setup hazards physicsBody
     fileprivate func setupPhysics(){
         
