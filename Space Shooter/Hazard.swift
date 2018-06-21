@@ -15,6 +15,7 @@ class Hazard: SKSpriteNode {
     
     let hazardSpeed: CGFloat = 100
     var spawnNode: SKNode?
+    let angularSpeed: CGFloat = 2.5
     
     /// Initialize a new Hazard
     ///
@@ -48,7 +49,8 @@ class Hazard: SKSpriteNode {
                                                                                         | physicsCategories.bounds
             
             //TODO: angularVelocity value needs to be generated from random unit circle
-            self.physicsBody?.angularVelocity = CGFloat(0.8)
+            self.physicsBody?.angularVelocity = randomAngularVelocity()
+            
             
         } else {
             print("Unable to crate Hazard Physics body")
@@ -73,5 +75,21 @@ class Hazard: SKSpriteNode {
     
     func updatePosition(){
         self.physicsBody?.velocity = CGVector(dx: 0, dy: -hazardSpeed)
+        //print("\(randomAngularVelocity() * 1.5)")
+    }
+    
+    
+    /// Generate a random angular velocity
+    ///
+    /// - Returns: CGFloat
+    func randomAngularVelocity() -> CGFloat{
+        
+        var randomNumber = CGFloat.random(in: -1.5...1.5)
+        
+        if(randomNumber == 0){
+            randomNumber += 1
+        }
+        return randomNumber * angularSpeed
+        
     }
 }
