@@ -24,13 +24,11 @@ class Hazard: SKSpriteNode {
     ///   - texture: SKTexture image for hazard
     ///   - hazardsCollection: Array being used to track hazards
     convenience init(scene: GameScene, texture: SKTexture, hazardsCollection: inout [Hazard]){
-        self.init(texture: texture, color: UIColor.white, size: texture.size())
        
+        self.init(texture: texture, color: UIColor.white, size: texture.size())
         setupPhysics()
         //set spawn point
         setSpawnPoint(scene: scene)
-        //add to hazardsCollection**
-        //add to scene
         scene.addChild(self)
         
     }
@@ -98,7 +96,7 @@ class Hazard: SKSpriteNode {
         
         var randomNumber = CGFloat.random(in: -1.5...1.5)
         
-        if(randomNumber == 0){
+        if(randomNumber == 0){  //TODO: Check between -1 and 1
             randomNumber += 1
         }
         return randomNumber * angularSpeed

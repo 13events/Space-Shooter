@@ -15,8 +15,7 @@ class Spawner{
     let rightEdge = CGFloat(260)
     let scene: GameScene
     let spawnNode: SKNode?
-    var textures: [SKTexture]
-
+    var textures = [SKTexture]()
     
     init(scene: GameScene, textures: [SKTexture]){
         self.textures = textures
@@ -46,8 +45,7 @@ class Spawner{
             //set Hazard positon to spawn_Node position
             hazard.position = spawnPos
             
-            //add Hazard to scene.
-            scene.addChild(hazard)
+            
         }
     }
     
