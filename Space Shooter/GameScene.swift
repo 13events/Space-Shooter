@@ -19,9 +19,14 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     var playerShip: PlayerShip?
     let weaponTexture = SKTexture(imageNamed: "weapon.png")
     let asteroid01Texture = SKTexture(imageNamed: "Asteroid01.png")
+    let triangle = SKTexture(imageNamed: "Triangle.png")
+    let square = SKTexture(imageNamed: "Square.png")
+    let stackedSquares = SKTexture(imageNamed: "Stacked_Square")
+    let star = SKTexture(imageNamed: "Star.png")
     var weapons = [PlayerWeapon]()      //TODO: Change functions to not use this array so we can remove it.
     var hazards = [Hazard]()            //TODO: Change functions to not use this array so we can remove it.
-   
+    var spawner: Spawner?
+    
     override func didMove(to view: SKView) {
        
         SetupAccelerometer()
@@ -29,10 +34,8 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         setupPlayer()
         physicsWorld.contactDelegate = self  //used in physics callbacks
         
-        //create a hazard
-        _ = Hazard(scene: self, texture: asteroid01Texture, hazardsCollection: &hazards)
-        
-        
+        //init spawner object
+        spawner = Spawner(scene: self, textures: [triangle, square,stackedSquares, star])
     }
     
     //MARK: Handle touch
@@ -40,13 +43,10 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     //TODO: Code spawns shot even when player is removed from scene
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        shoot(scene: self, texture: weaponTexture, collection: &weapons, duration: 0.5)
-        /*
-        /****  Make this into a function?  *****/
-        let bullet = PlayerWeapon(scene: self, texture: weaponTexture, collection: &weapons)
-        bullet.position = (playerShip?.position)!
-        bullet.position.y += 34     //make this value into a constant or something, NO MAGiC NUMBERS!
-        */
+        guard spawner != nil  else {return}
+        spawner?.spawnRandom()
+        shoot(scene: self, texture: weaponTexture, collection: &weapons, duration: 0.5) //Roll this into player Class?
+       
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -107,15 +107,11 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     /// spawning hazards
     func setupPhysicsBounds(){
         
-        //make bounds taller than screen, so we have room to spawn our hazards.
-        let physicsBounds = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: frame.height + CGFloat(400))
+        //make bounds taller than screen and shift down so we have room to spawn our hazards.
+        let physicsBounds = CGRect(x: frame.origin.x, y: frame.origin.y - 200, width: frame.width, height: frame.height + CGFloat(400))
         
-        //create the edgelooop uisng size of frame
-        print("Frame Width: \(frame.width)")
-        print("Frame Height: \(frame.height)")
-        
+        //creat physics edgeloop
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: physicsBounds)
-        // self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         
         //set self physicsBody category to 'Bounds'
         self.physicsBody?.categoryBitMask = physicsCategories.bounds
