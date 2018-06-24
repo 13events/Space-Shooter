@@ -21,6 +21,13 @@ class Spawner{
         self.textures = textures
         self.scene = scene
         spawnNode = scene.childNode(withName: "Spawn_Node") //get refernece to spawn_node in SKS file
+        
+        let spawnTimer = SKAction.run { self.spawnRandom() }
+        let waitTime = SKAction.wait(forDuration: 0.5)
+        
+        let spawnSequence = SKAction.sequence([spawnTimer,waitTime])
+        
+        scene.run(SKAction.repeatForever(spawnSequence))
     }
     
     /// Spawns a random hazard at a random position off screen along the x-axis

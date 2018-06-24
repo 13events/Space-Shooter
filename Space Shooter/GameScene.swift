@@ -43,8 +43,8 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     //TODO: Code spawns shot even when player is removed from scene
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        guard spawner != nil  else {return}
-        spawner?.spawnRandom()
+       // guard spawner != nil  else {return}
+        //spawner?.spawnRandom()
         shoot(scene: self, texture: weaponTexture, collection: &weapons, duration: 0.5) //Roll this into player Class?
        
     }
