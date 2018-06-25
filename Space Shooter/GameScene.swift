@@ -99,7 +99,9 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     //MARK: Setup Functions
     
     func setupScoreLabel(){
-         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
+        scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
+        scoreLabel?.text = "\(score)"
+    
     }
     /// Set up accelerometer and update interval
     fileprivate func SetupAccelerometer() {
