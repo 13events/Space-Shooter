@@ -51,7 +51,7 @@ class Hazard: SKSpriteNode {
         //check that we have a texture
         if let texture = self.texture {
             
-            self.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
+            self.physicsBody = SKPhysicsBody(rectangleOf: texture.size(), center: self.anchorPoint)
             self.physicsBody?.affectedByGravity = false
             self.physicsBody?.categoryBitMask = physicsCategories.hazard
             self.physicsBody?.collisionBitMask = 0
