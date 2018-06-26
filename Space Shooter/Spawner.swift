@@ -23,7 +23,7 @@ class Spawner{
         spawnNode = scene.childNode(withName: "Spawn_Node") //get refernece to spawn_node in SKS file
         
         let spawnTimer = SKAction.run { self.spawnRandom() }
-        let waitTime = SKAction.wait(forDuration: 0.5)
+        let waitTime = SKAction.wait(forDuration: 1.5)
         
         let spawnSequence = SKAction.sequence([spawnTimer,waitTime])
         

@@ -26,6 +26,16 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     var weapons = [PlayerWeapon]()      //TODO: Change functions to not use this array so we can remove it.
     var hazards = [Hazard]()            //TODO: Change functions to not use this array so we can remove it.
     var spawner: Spawner?
+    var scoreLabel: SKLabelNode?
+    
+    var score: Int = 0 {
+        willSet {
+            //TODO: Update score label
+            print("Score: \(score)")
+            guard scoreLabel != nil else {return}
+            scoreLabel?.text = "\(score)"
+        }
+    }
     
     override func didMove(to view: SKView) {
        
@@ -33,6 +43,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         setupPhysicsBounds()
         setupPlayer()
         physicsWorld.contactDelegate = self  //used in physics callbacks
+        setupScoreLabel()
         
         //init spawner object
         spawner = Spawner(scene: self, textures: [triangle, square,stackedSquares, star])
@@ -87,6 +98,11 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     
     //MARK: Setup Functions
     
+    func setupScoreLabel(){
+        scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
+        scoreLabel?.text = "\(score)"
+    
+    }
     /// Set up accelerometer and update interval
     fileprivate func SetupAccelerometer() {
         if self.motion.isAccelerometerAvailable {
@@ -211,9 +227,10 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
             //check hazard/weapon collision
         } else if ((firstBody.categoryBitMask & physicsCategories.playerWeapon != 0 && (secondBody.categoryBitMask & physicsCategories.hazard != 0))){
             print("Weapon and Asteroid collision")
-            if let player = firstBody.node as? PlayerWeapon, let hazard = secondBody.node as? Hazard{
-                player.removeFromParent()
+            if let playerWeapon = firstBody.node as? PlayerWeapon, let hazard = secondBody.node as? Hazard{
+                playerWeapon.removeFromParent()
                 hazard.removeFromParent()
+                score += 1
             }
             
             //check player/hazard collision

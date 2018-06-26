@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82229CB720E1982300F3AA98 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82229CB620E1982300F3AA98 /* Enemy.swift */; };
 		8251630920C7D74100A8E5F4 /* PhysicsCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8251630820C7D74100A8E5F4 /* PhysicsCategories.swift */; };
 		82AFE40D20BBFC3B00D63569 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AFE40C20BBFC3B00D63569 /* AppDelegate.swift */; };
 		82AFE40F20BBFC3B00D63569 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 82AFE40E20BBFC3B00D63569 /* GameScene.sks */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		82229CB620E1982300F3AA98 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		8251630820C7D74100A8E5F4 /* PhysicsCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategories.swift; sourceTree = "<group>"; };
 		82AFE40920BBFC3B00D63569 /* Space Shooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Shooter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82AFE40C20BBFC3B00D63569 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				82AFE41B20BBFC3C00D63569 /* LaunchScreen.storyboard */,
 				82AFE41E20BBFC3C00D63569 /* Info.plist */,
 				9718EDBB20D34D540094435E /* Hazard.swift */,
+				82229CB620E1982300F3AA98 /* Enemy.swift */,
 				82CE8CAF20C1E239005CFE44 /* PlayerShip.swift */,
 				8251630820C7D74100A8E5F4 /* PhysicsCategories.swift */,
 				82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */,
@@ -170,6 +173,7 @@
 				82CE8CB020C1E239005CFE44 /* PlayerShip.swift in Sources */,
 				82AFE41320BBFC3B00D63569 /* GameScene.swift in Sources */,
 				9718EDBC20D34D540094435E /* Hazard.swift in Sources */,
+				82229CB720E1982300F3AA98 /* Enemy.swift in Sources */,
 				82AFE41520BBFC3B00D63569 /* GameViewController.swift in Sources */,
 				82BEE61B20CB4328006CDC07 /* PlayerWeapon.swift in Sources */,
 				82AFE40D20BBFC3B00D63569 /* AppDelegate.swift in Sources */,
@@ -321,7 +325,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MYRE99FUY6;
 				INFOPLIST_FILE = "Space Shooter/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -340,7 +344,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MYRE99FUY6;
 				INFOPLIST_FILE = "Space Shooter/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
