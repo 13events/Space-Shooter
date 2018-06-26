@@ -13,6 +13,8 @@ import SpriteKit
 /// Class is used to create and spawn new hazards.
 class Hazard: SKSpriteNode {
     
+    
+    /// Sets speed of hazard
     let hazardSpeed: CGFloat = 100
     var spawnNode: SKNode?
     let angularSpeed: CGFloat = 2.5
@@ -23,9 +25,9 @@ class Hazard: SKSpriteNode {
     ///   - scene: The calling scene
     ///   - texture: SKTexture image for hazard
     ///   - hazardsCollection: Array being used to track hazards
-    convenience init(scene: GameScene, texture: SKTexture, hazardsCollection: inout [Hazard]){
+    init(scene: GameScene, texture: SKTexture, hazardsCollection: inout [Hazard]){
        
-        self.init(texture: texture, color: UIColor.white, size: texture.size())
+        super.init(texture: texture, color: SKColor.white, size: texture.size())
         setupPhysics()
         //set spawn point
         setSpawnPoint(scene: scene)
@@ -33,8 +35,8 @@ class Hazard: SKSpriteNode {
         
     }
     
-    convenience init(scene: GameScene, texture: SKTexture){
-        self.init(texture: texture, color: UIColor.white, size: texture.size())
+    init(scene: GameScene, texture: SKTexture){
+        super.init(texture: texture, color: SKColor.white, size: texture.size())
         
         setupPhysics()
         //set spawn point
@@ -43,6 +45,10 @@ class Hazard: SKSpriteNode {
         //add to scene
         scene.addChild(self)
         
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     /// Setup hazards physicsBody
