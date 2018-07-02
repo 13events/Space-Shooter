@@ -10,6 +10,23 @@ import Foundation
 import SpriteKit
 
 
+
+
+protocol Hazard {
+    var hazardSpeed: CGFloat {get set}
+    var spawnNode: SKNode? {get set}
+    var spriteNode: SKSpriteNode? {get set}
+    var angularSpeed: CGFloat {get set}
+    
+    func initSpriteNode(scene: GameScene, texture: SKTexture)
+    func setupPhysics()
+    func setSpawnPoint(scene: GameScene)
+    func updatePosition()
+    
+}
+
+/*
+ 
 /// Class is used to create and spawn new hazards.
 class Hazard: SKSpriteNode {
     
@@ -109,3 +126,4 @@ class Hazard: SKSpriteNode {
         
     }
 }
+*/
