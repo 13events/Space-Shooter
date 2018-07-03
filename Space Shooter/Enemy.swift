@@ -10,6 +10,20 @@ import Foundation
 import SpriteKit
 
 class Enemy : Hazard {
+    var hazardSpeed: CGFloat = 0
+    
+    func setupPhysics() {
+        
+    }
+    
+    func setSpawnPoint(scene: GameScene) {
+        
+    }
+    
+    func updatePosition() {
+        
+    }
+    
     
     init(scene: GameScene, texture: SKTexture){
     

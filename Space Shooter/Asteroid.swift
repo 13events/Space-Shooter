@@ -9,51 +9,40 @@
 import Foundation
 import SpriteKit
 
-class Asteroid : Hazard {
+//TODO: Explore inheritance of SKSpriteNode
+class Asteroid : SKSpriteNode, Hazard {
     
+
+    var hazardSpeed: CGFloat
+    // var spawnNode: SKNode?
     
-    var spriteNode: SKSpriteNode? = nil
+    var angularSpeed: CGFloat
     
-    var hazardSpeed: CGFloat = 100
-    
-    var spawnNode: SKNode? = nil
-    
-    var angularSpeed: CGFloat = 2.5
-    
-    init(){
-        //call all setup functions in here
-    }
-    
-    /// Sets up the spriteNode for this Asteriod
-    ///
-    /// - Parameters:
-    ///   - scene: The calling SKScene
-    ///   - texture: SKTexture applied to sprite
-    func initSpriteNode(scene: GameScene, texture: SKTexture) {
-        spriteNode = SKSpriteNode(texture: texture, color: UIColor.white, size: texture.size())
+    init(texture:SKTexture){
+        
+        self.hazardSpeed = 100
+        self.angularSpeed = 2.5
+        
+        super.init(texture: texture, color: UIColor.white, size: texture.size())
+        
+        self.setupPhysics()
+        
     }
     
     /// Setup the Asteroids physic properties
     func setupPhysics() {
-        
-        guard let sprite = spriteNode, let texture = spriteNode?.texture else
-        {
-            print("Uninitialized Asteroid SKSpriteNode!")
-            return
+        if let texture = self.texture{
+            
+            self.physicsBody = SKPhysicsBody(rectangleOf: texture.size(), center: self.anchorPoint)
+            self.physicsBody?.affectedByGravity = false
+            self.physicsBody?.categoryBitMask = physicsCategories.hazard
+            self.physicsBody?.collisionBitMask = physicsCategories.none
+            self.physicsBody?.contactTestBitMask = physicsCategories.player | physicsCategories.playerWeapon | physicsCategories.bounds
+            
+            self.physicsBody?.angularVelocity = randomAngularVelocity()
+        } else {
+            print("Unable to create Asteroid Physics body.")
         }
-        
-        sprite.physicsBody? = SKPhysicsBody(rectangleOf: texture.size(), center: sprite.anchorPoint)
-        sprite.physicsBody?.affectedByGravity = false
-        sprite.physicsBody?.categoryBitMask = physicsCategories.hazard
-        sprite.physicsBody?.collisionBitMask = physicsCategories.none
-        sprite.physicsBody?.contactTestBitMask = physicsCategories.player | physicsCategories.playerWeapon |                                               physicsCategories.bounds
-        
-        //set random angular velocity
-        sprite.physicsBody?.angularVelocity = randomAngularVelocity()
-        
-        
-        
-        
         
     }
     
@@ -62,12 +51,20 @@ class Asteroid : Hazard {
     }
     
     func updatePosition() {
-       
+       self.physicsBody?.velocity = CGVector(dx: 0, dy: -hazardSpeed)
     }
     
     func randomAngularVelocity() -> CGFloat {
-        return CGFloat(0.0)
+        var randomNumber = CGFloat.random(in: -1.5...1.5)
+        
+        if(randomNumber == 0){  //TODO: Check between -1 and 1
+            randomNumber += 1
+        }
+        return randomNumber * angularSpeed
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }

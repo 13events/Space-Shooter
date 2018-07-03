@@ -78,6 +78,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     /// Handles calling the correct update function for each childNode in the scene.
     func updateSprites(){
     
+        
         for node in children {
             //check player
             if let player = node as? PlayerShip{
@@ -220,14 +221,14 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
             //check hazard/bounds collision
         } else if ((firstBody.categoryBitMask & physicsCategories.bounds != 0 && (secondBody.categoryBitMask & physicsCategories.hazard != 0))){
              print("Asteroid and Physics Bounds contact")
-            if let hazard = secondBody.node as? Hazard{
+            if let hazard = secondBody.node as? Asteroid{
                 hazard.removeFromParent()
             }
             
             //check hazard/weapon collision
         } else if ((firstBody.categoryBitMask & physicsCategories.playerWeapon != 0 && (secondBody.categoryBitMask & physicsCategories.hazard != 0))){
             print("Weapon and Asteroid collision")
-            if let playerWeapon = firstBody.node as? PlayerWeapon, let hazard = secondBody.node as? Hazard{
+            if let playerWeapon = firstBody.node as? PlayerWeapon, let hazard = secondBody.node as? Asteroid{
                 playerWeapon.removeFromParent()
                 hazard.removeFromParent()
                 score += 1
@@ -237,7 +238,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         } else if ((firstBody.categoryBitMask & physicsCategories.player != 0 && (secondBody.categoryBitMask &
             physicsCategories.hazard != 0))){
             print("Hazard/Player collision")
-            if let player = firstBody.node as? PlayerShip, let hazard = secondBody.node as? Hazard{
+            if let player = firstBody.node as? PlayerShip, let hazard = secondBody.node as? Asteroid{
                 player.removeFromParent()
                 hazard.removeFromParent()
             }

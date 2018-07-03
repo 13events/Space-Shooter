@@ -13,15 +13,14 @@ import SpriteKit
 
 
 protocol Hazard {
-    var hazardSpeed: CGFloat {get set}
-    var spawnNode: SKNode? {get set}
-    var spriteNode: SKSpriteNode? {get set}
-    var angularSpeed: CGFloat {get set}
     
-    func initSpriteNode(scene: GameScene, texture: SKTexture)
+    var hazardSpeed: CGFloat {get set}
     func setupPhysics()
     func setSpawnPoint(scene: GameScene)
     func updatePosition()
+    
+}
+extension Hazard where Self: SKSpriteNode{
     
 }
 
