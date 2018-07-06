@@ -29,7 +29,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     var scoreLabel: SKLabelNode?
     
     var score: Int = 0 {
-        willSet {
+        didSet {
             //TODO: Update score label
             print("Score: \(score)")
             guard scoreLabel != nil else {return}
@@ -78,6 +78,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     /// Handles calling the correct update function for each childNode in the scene.
     func updateSprites(){
     
+        
         for node in children {
             //check player
             if let player = node as? PlayerShip{
@@ -88,7 +89,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
                 bullet.updatePosition()
             }
             //check hazards
-            if let hazard = node as? Hazard{
+            if let hazard = node as? HazardProtocol{
                 hazard.updatePosition()
             }
         }

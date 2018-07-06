@@ -11,11 +11,6 @@ import SpriteKit
 
 class Enemy : Hazard {
     
-    override init(scene: GameScene, texture: SKTexture){
-        super.init(scene: scene, texture: texture)
-    }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    
 }

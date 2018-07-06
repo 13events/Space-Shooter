@@ -10,6 +10,32 @@ import Foundation
 import SpriteKit
 
 
+
+
+class Hazard: SKSpriteNode {
+    
+    var hazardSpeed: CGFloat
+    
+    init(texture: SKTexture, hazardSpeed: CGFloat){
+        self.hazardSpeed = hazardSpeed
+        super.init(texture: texture, color: UIColor.white, size: texture.size())
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+protocol HazardProtocol{
+    func setupPhysics()
+    func updatePosition()
+    
+}
+
+
+/*
+ 
 /// Class is used to create and spawn new hazards.
 class Hazard: SKSpriteNode {
     
@@ -109,3 +135,4 @@ class Hazard: SKSpriteNode {
         
     }
 }
+*/
