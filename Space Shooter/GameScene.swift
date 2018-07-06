@@ -29,7 +29,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     var scoreLabel: SKLabelNode?
     
     var score: Int = 0 {
-        willSet {
+        didSet {
             //TODO: Update score label
             print("Score: \(score)")
             guard scoreLabel != nil else {return}
@@ -89,7 +89,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
                 bullet.updatePosition()
             }
             //check hazards
-            if let hazard = node as? Hazard{
+            if let hazard = node as? HazardProtocol{
                 hazard.updatePosition()
             }
         }
@@ -221,14 +221,14 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
             //check hazard/bounds collision
         } else if ((firstBody.categoryBitMask & physicsCategories.bounds != 0 && (secondBody.categoryBitMask & physicsCategories.hazard != 0))){
              print("Asteroid and Physics Bounds contact")
-            if let hazard = secondBody.node as? Asteroid{
+            if let hazard = secondBody.node as? Hazard{
                 hazard.removeFromParent()
             }
             
             //check hazard/weapon collision
         } else if ((firstBody.categoryBitMask & physicsCategories.playerWeapon != 0 && (secondBody.categoryBitMask & physicsCategories.hazard != 0))){
             print("Weapon and Asteroid collision")
-            if let playerWeapon = firstBody.node as? PlayerWeapon, let hazard = secondBody.node as? Asteroid{
+            if let playerWeapon = firstBody.node as? PlayerWeapon, let hazard = secondBody.node as? Hazard{
                 playerWeapon.removeFromParent()
                 hazard.removeFromParent()
                 score += 1
@@ -238,7 +238,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         } else if ((firstBody.categoryBitMask & physicsCategories.player != 0 && (secondBody.categoryBitMask &
             physicsCategories.hazard != 0))){
             print("Hazard/Player collision")
-            if let player = firstBody.node as? PlayerShip, let hazard = secondBody.node as? Asteroid{
+            if let player = firstBody.node as? PlayerShip, let hazard = secondBody.node as? Hazard{
                 player.removeFromParent()
                 hazard.removeFromParent()
             }

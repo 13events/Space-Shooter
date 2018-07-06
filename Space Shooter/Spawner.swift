@@ -47,7 +47,7 @@ class Spawner{
             
             guard let spawnPos = spawnNode?.position else { return }
             //create new Hazard from texture
-            let asteroid = Asteroid(texture: texture)
+            let asteroid = Asteroid(texture: texture, asteroidSpeed: 100)
             
             //set Hazard positon to spawn_Node position
             asteroid.position = spawnPos

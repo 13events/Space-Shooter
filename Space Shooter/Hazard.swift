@@ -12,17 +12,27 @@ import SpriteKit
 
 
 
-protocol Hazard {
+class Hazard: SKSpriteNode {
     
-    var hazardSpeed: CGFloat {get set}
+    var hazardSpeed: CGFloat
+    
+    init(texture: SKTexture, hazardSpeed: CGFloat){
+        self.hazardSpeed = hazardSpeed
+        super.init(texture: texture, color: UIColor.white, size: texture.size())
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+protocol HazardProtocol{
     func setupPhysics()
-    func setSpawnPoint(scene: GameScene)
     func updatePosition()
     
 }
-extension Hazard where Self: SKSpriteNode{
-    
-}
+
 
 /*
  

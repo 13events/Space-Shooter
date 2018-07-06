@@ -10,21 +10,16 @@ import Foundation
 import SpriteKit
 
 //TODO: Explore inheritance of SKSpriteNode
-class Asteroid : SKSpriteNode, Hazard {
+class Asteroid :Hazard, HazardProtocol {
     
-
-    var hazardSpeed: CGFloat
-    // var spawnNode: SKNode?
     
     var angularSpeed: CGFloat
     
-    init(texture:SKTexture){
-        
-        self.hazardSpeed = 100
+    init(texture:SKTexture, asteroidSpeed: CGFloat){
+       
         self.angularSpeed = 2.5
         
-        super.init(texture: texture, color: UIColor.white, size: texture.size())
-        
+        super.init(texture: texture, hazardSpeed: asteroidSpeed)
         self.setupPhysics()
         
     }
