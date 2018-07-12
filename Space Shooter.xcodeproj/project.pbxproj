@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		82229CB720E1982300F3AA98 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82229CB620E1982300F3AA98 /* Enemy.swift */; };
 		8251630920C7D74100A8E5F4 /* PhysicsCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8251630820C7D74100A8E5F4 /* PhysicsCategories.swift */; };
+		826213B820F7AE74001A616E /* SKTextureExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826213B720F7AE74001A616E /* SKTextureExtension.swift */; };
 		828427F920E1FE3300F5B976 /* Asteroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828427F820E1FE3300F5B976 /* Asteroid.swift */; };
 		82AFE40D20BBFC3B00D63569 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AFE40C20BBFC3B00D63569 /* AppDelegate.swift */; };
 		82AFE40F20BBFC3B00D63569 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 82AFE40E20BBFC3B00D63569 /* GameScene.sks */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		82229CB620E1982300F3AA98 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		8251630820C7D74100A8E5F4 /* PhysicsCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategories.swift; sourceTree = "<group>"; };
+		826213B720F7AE74001A616E /* SKTextureExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKTextureExtension.swift; sourceTree = "<group>"; };
 		828427F820E1FE3300F5B976 /* Asteroid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asteroid.swift; sourceTree = "<group>"; };
 		82AFE40920BBFC3B00D63569 /* Space Shooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Shooter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82AFE40C20BBFC3B00D63569 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */,
 				82C248FB20DB439100FA9326 /* Spawner.swift */,
 				828427F820E1FE3300F5B976 /* Asteroid.swift */,
+				826213B720F7AE74001A616E /* SKTextureExtension.swift */,
 			);
 			path = "Space Shooter";
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				82AFE41520BBFC3B00D63569 /* GameViewController.swift in Sources */,
 				82BEE61B20CB4328006CDC07 /* PlayerWeapon.swift in Sources */,
 				82AFE40D20BBFC3B00D63569 /* AppDelegate.swift in Sources */,
+				826213B820F7AE74001A616E /* SKTextureExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
