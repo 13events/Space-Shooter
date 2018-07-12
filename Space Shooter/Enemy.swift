@@ -31,16 +31,16 @@ class Enemy : Hazard, HazardProtocol {
             self.physicsBody?.contactTestBitMask = physicsCategories.player | physicsCategories.playerWeapon | physicsCategories.bounds
             
         } else {
-            print("Unable to create Asteroid Physics body.")
+            print("Unable to create Enemy Physics body.")
         }
         
     }
     
     
     func updatePosition() {
-        
+        self.physicsBody?.velocity = CGVector(dx: 0, dy: -self.hazardSpeed)
+
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
