@@ -46,7 +46,7 @@ class Asteroid :Hazard, HazardProtocol {
     }
     
     func updatePosition() {
-       self.physicsBody?.velocity = CGVector(dx: 0, dy: -hazardSpeed)
+       self.physicsBody?.velocity = CGVector(dx: 0, dy: -self.hazardSpeed)
     }
     
     func randomAngularVelocity() -> CGFloat {
