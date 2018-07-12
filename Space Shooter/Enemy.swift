@@ -19,7 +19,6 @@ class Enemy : Hazard, HazardProtocol {
         
     }
     
-   
     func setupPhysics() {
         
         if let texture = self.texture {
