@@ -23,6 +23,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     let square = SKTexture(imageNamed: "Square.png")
     let stackedSquares = SKTexture(imageNamed: "Stacked_Square")
     let star = SKTexture(imageNamed: "Star.png")
+    let enemy = SKTexture(imageNamed: "enemy.png")
     var weapons = [PlayerWeapon]()      //TODO: Change functions to not use this array so we can remove it.
     var hazards = [Hazard]()            //TODO: Change functions to not use this array so we can remove it.
     var spawner: Spawner?
@@ -46,7 +47,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
         setupScoreLabel()
         
         //init spawner object
-        spawner = Spawner(scene: self, textures: [triangle, square,stackedSquares, star])
+        spawner = Spawner(scene: self, textures: [triangle, square,stackedSquares, star, enemy])
     }
     
     //MARK: Handle touch

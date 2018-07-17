@@ -22,10 +22,10 @@ class Spawner{
         self.scene = scene
         spawnNode = scene.childNode(withName: "Spawn_Node") //get refernece to spawn_node in SKS file
         
-        let spawnTimer = SKAction.run { self.spawnRandom() }
+        let spawn = SKAction.run { self.spawnRandom() }
         let waitTime = SKAction.wait(forDuration: 1.5)
         
-        let spawnSequence = SKAction.sequence([spawnTimer,waitTime])
+        let spawnSequence = SKAction.sequence([spawn,waitTime])
         
         scene.run(SKAction.repeatForever(spawnSequence))
     }
@@ -38,6 +38,11 @@ class Spawner{
         
         //pick a random texture
         if let texture = self.textures.first{
+            
+            //if enemy texture, make enemy.
+            if let textureName = texture.name{
+                print("This is \(textureName)")
+            }
             
             //randomly move spawn_Node
             let randomXPos = CGFloat.random(in: -260...260)
