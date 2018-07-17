@@ -28,6 +28,9 @@ class PlayerShip : SKSpriteNode {
         let playerTexture = SKTexture(imageNamed: "player_ship")
         let playerNode = scene.childNode(withName: "player_node")
         self.init(texture: playerTexture, color: UIColor.white, size: playerTexture.size())
+        
+        //scale sprite to half size for better fit on screen
+        //TODO: Create a new sprite texture that does not require scaling.
         self.scale(to: CGSize(width: self.size.width / 2, height: self.size.height / 2))
         self.position = (playerNode?.position)!
         
@@ -58,12 +61,21 @@ class PlayerShip : SKSpriteNode {
         }
     }
     
-    /// setup physic properties of the weapon sprite
+    /// setup physic properties for player
     func setupPhysics(){
-        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+        
+        
+        guard let texture = self.texture else {print("Could not get player texture"); return}
+        
+        //Create a CGSize that is scaled to half the size of the original texture
+        //This is done becaues we are rendering player sprite at ha;d size.
+        let textureSize:CGSize = CGSize(width: texture.size().width/2, height: texture.size().height/2)
+        
+        self.physicsBody = SKPhysicsBody(texture: texture, size: textureSize)
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.categoryBitMask = physicsCategories.player
         self.physicsBody?.collisionBitMask = physicsCategories.bounds
+        
     }
     
 }
