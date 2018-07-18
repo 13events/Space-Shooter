@@ -22,10 +22,10 @@ class Spawner{
         self.scene = scene
         spawnNode = scene.childNode(withName: "Spawn_Node") //get refernece to spawn_node in SKS file
         
-        let spawnTimer = SKAction.run { self.spawnRandom() }
+        let spawn = SKAction.run { self.spawnRandom() }
         let waitTime = SKAction.wait(forDuration: 1.5)
         
-        let spawnSequence = SKAction.sequence([spawnTimer,waitTime])
+        let spawnSequence = SKAction.sequence([spawn,waitTime])
         
         scene.run(SKAction.repeatForever(spawnSequence))
     }
@@ -39,19 +39,51 @@ class Spawner{
         //pick a random texture
         if let texture = self.textures.first{
             
-            //randomly move spawn_Node
-            let randomXPos = CGFloat.random(in: -260...260)
-            
-            //set spawn_Node x position
-            spawnNode?.position.x = randomXPos
-            
-            guard let spawnPos = spawnNode?.position else { return }
-            //create new Hazard from texture
-            let asteroid = Asteroid(texture: texture, asteroidSpeed: 100)
-            
-            //set Hazard positon to spawn_Node position
-            asteroid.position = spawnPos
-            scene.addChild(asteroid)
+            //if enemy texture, make enemy.
+            if let textureName = texture.name{
+                
+                if  textureName.contains("enemy") {
+                    print("This is an enemy.")
+                    print("\(textureName)")
+                    
+                    //randomly move spawn_Node
+                    let randomXPos = CGFloat.random(in: -260...260)
+                    
+                    //set spawn_Node x position
+                    spawnNode?.position.x = randomXPos
+                    
+                    guard let spawnPos = spawnNode?.position else { return }
+                    
+                    //create new Hazard from texture
+                    let enemy = Enemy(texture: texture, speed: 100)
+                    
+                    //set Hazard positon to spawn_Node position
+                    enemy.position = spawnPos
+                    scene.addChild(enemy)
+                    
+                    
+                } else {
+                    
+                    print("Created Asteroid")
+                    
+                    //randomly move spawn_Node
+                    let randomXPos = CGFloat.random(in: -260...260)
+                    
+                    //set spawn_Node x position
+                    spawnNode?.position.x = randomXPos
+                    
+                    guard let spawnPos = spawnNode?.position else { return }
+                    
+                    //create new Hazard from texture
+                    let asteroid = Asteroid(texture: texture, asteroidSpeed: 100)
+                    
+                    //set Hazard positon to spawn_Node position
+                    asteroid.position = spawnPos
+                    scene.addChild(asteroid)
+                    
+                }
+                
+            }
             
             
         }
