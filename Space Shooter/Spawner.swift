@@ -56,6 +56,7 @@ class Spawner{
                     
                     //create new Hazard from texture
                     let enemy = Enemy(texture: texture, speed: 100)
+                
                     
                     //set Hazard positon to spawn_Node position
                     enemy.position = spawnPos

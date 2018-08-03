@@ -19,4 +19,9 @@ extension SKTexture {
         return comps.count > 1 ? comps[1] : nil
     }
     
+    var size:String? {
+        let comps = description.components(separatedBy: "'")
+        return comps.count > 2 ? comps[2] : nil
+        
+    }
 }

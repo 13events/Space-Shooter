@@ -20,26 +20,12 @@ class Enemy : Hazard, HazardProtocol {
      
         super.init(texture: texture, hazardSpeed: speed)
         self.setupPhysics()
-        
-        //Basic Evasion menuvers using random timer and predetermined destinations.
-        //TODO: Create random destinations rather than predetermined ones.
-        //TODO: Continue implementing a custome SKAction, perhaps we can implement randomness inside here.
-        let customAction = SKAction.run ({
-            print("Im inside the skAction.run block inside Enemy Object.")
-        })
-        self.run(customAction)
-        let moveLeft = SKAction.moveTo(x: leftEdge, duration: 1)
-        let moveRight = SKAction.moveTo(x: rightEdge, duration: 1)
-        let moveCenter = SKAction.moveTo(x: center, duration: 1)
-        let waitTime = SKAction.wait(forDuration: 2, withRange: 4)
-        
-        let evadeSequence = SKAction.sequence([waitTime,moveLeft,waitTime,moveCenter,waitTime,moveRight, waitTime, moveCenter])
-        run(SKAction.repeatForever(evadeSequence))
+        self.setupEvadeManeuvers()
 
         
     }
     
-    func setupPhysics() {
+    internal func setupPhysics() {
         
         if let texture = self.texture {
             
@@ -60,6 +46,40 @@ class Enemy : Hazard, HazardProtocol {
     func updatePosition() {
         self.physicsBody?.velocity = CGVector(dx: 0, dy: -self.hazardSpeed)
         
+        
+    }
+    
+    
+    /// Setup the Meneuver behaviors for enemy
+    fileprivate func setupEvadeManeuvers() {
+        //TODO: Create some random move locations
+        //TODO: Create SKActions with random durations and moveTo using random locations
+        
+        //This action creates a random move location
+        let randomXMovement = SKAction.run {
+            
+            //get random number within app view
+            var randomXLocation = CGFloat.random(in: self.center...self.rightEdge)
+            
+            //TODO: ADD a check that randomXLocation is at least 50 pixel from current location
+            let leftOrRight = Int.random(in: 0...1) //decide what direction to go
+            
+            if(leftOrRight == 1) {  //reverse sign to go left
+                randomXLocation *= -1
+            }
+            
+            //create a move action with random location
+            let moveAction = SKAction.moveTo(x: randomXLocation, duration: 2)
+            
+            self.run(moveAction)
+        }
+        
+        //setup wait action then create sequence
+        let wait = SKAction.wait(forDuration: 3, withRange: 0.5)
+        let sequence = SKAction.sequence([randomXMovement, wait])
+        
+        //run sequence on self.
+        self.run(SKAction.repeatForever(sequence))
         
     }
     
