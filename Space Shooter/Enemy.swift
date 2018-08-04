@@ -52,6 +52,7 @@ class Enemy : Hazard, HazardProtocol {
     
     /// Setup the Meneuver behaviors for enemy
     fileprivate func setupEvadeManeuvers() {
+        
         //TODO: Create some random move locations
         //TODO: Create SKActions with random durations and moveTo using random locations
         
@@ -60,6 +61,12 @@ class Enemy : Hazard, HazardProtocol {
             
             //get random number within app view
             var randomXLocation = CGFloat.random(in: self.center...self.rightEdge)
+            
+            //check that new location is at least a 50 pixel displacement from current location
+            while(abs(Int32(self.position.x - randomXLocation)) < 50)
+            {
+                randomXLocation = CGFloat.random(in: self.center...self.rightEdge)
+            }
             
             //TODO: ADD a check that randomXLocation is at least 50 pixel from current location
             let leftOrRight = Int.random(in: 0...1) //decide what direction to go
