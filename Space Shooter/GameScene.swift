@@ -55,8 +55,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
     //TODO: Code spawns shot even when player is removed from scene
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-       // guard spawner != nil  else {return}
-        //spawner?.spawnRandom()
+        guard ((playerShip) != nil) else { return }
         shoot(scene: self, texture: weaponTexture, collection: &weapons, duration: 0.5) //Roll this into player Class?
        
     }
@@ -241,6 +240,7 @@ class GameScene: SKScene,  SKPhysicsContactDelegate {
             print("Hazard/Player collision")
             if let player = firstBody.node as? PlayerShip, let hazard = secondBody.node as? Hazard{
                 player.removeFromParent()
+                playerShip = nil;
                 hazard.removeFromParent()
             }
             
