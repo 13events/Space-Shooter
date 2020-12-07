@@ -21,6 +21,7 @@
 		82BEE61B20CB4328006CDC07 /* PlayerWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */; };
 		82C248FC20DB439100FA9326 /* Spawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C248FB20DB439100FA9326 /* Spawner.swift */; };
 		82CE8CB020C1E239005CFE44 /* PlayerShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE8CAF20C1E239005CFE44 /* PlayerShip.swift */; };
+		82D6B5DF257DC7F2002A4D11 /* ToDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 82D6B5DE257DC7F2002A4D11 /* ToDo.rtf */; };
 		9718EDBC20D34D540094435E /* Hazard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718EDBB20D34D540094435E /* Hazard.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		82BEE61A20CB4328006CDC07 /* PlayerWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWeapon.swift; sourceTree = "<group>"; };
 		82C248FB20DB439100FA9326 /* Spawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawner.swift; sourceTree = "<group>"; };
 		82CE8CAF20C1E239005CFE44 /* PlayerShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerShip.swift; sourceTree = "<group>"; };
+		82D6B5DE257DC7F2002A4D11 /* ToDo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		9718EDBB20D34D540094435E /* Hazard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hazard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,7 @@
 				82C248FB20DB439100FA9326 /* Spawner.swift */,
 				828427F820E1FE3300F5B976 /* Asteroid.swift */,
 				826213B720F7AE74001A616E /* SKTextureExtension.swift */,
+				82D6B5DE257DC7F2002A4D11 /* ToDo.rtf */,
 			);
 			path = "Space Shooter";
 			sourceTree = "<group>";
@@ -129,7 +132,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Jose Martinez";
 				TargetAttributes = {
 					82AFE40820BBFC3B00D63569 = {
@@ -160,6 +163,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82D6B5DF257DC7F2002A4D11 /* ToDo.rtf in Resources */,
 				82AFE41820BBFC3B00D63569 /* Main.storyboard in Resources */,
 				82AFE40F20BBFC3B00D63569 /* GameScene.sks in Resources */,
 				82AFE41A20BBFC3C00D63569 /* Assets.xcassets in Resources */,
@@ -333,12 +337,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MYRE99FUY6;
 				INFOPLIST_FILE = "Space Shooter/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JDM.Space-Shooter";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.JDM990.Space-Shooter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -352,12 +356,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MYRE99FUY6;
 				INFOPLIST_FILE = "Space Shooter/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JDM.Space-Shooter";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.JDM990.Space-Shooter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
