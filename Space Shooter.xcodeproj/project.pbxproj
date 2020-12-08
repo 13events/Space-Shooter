@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		82229CB720E1982300F3AA98 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82229CB620E1982300F3AA98 /* Enemy.swift */; };
+		8224DB4D257EC8110098C73D /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8224DB4C257EC8110098C73D /* MainMenu.sks */; };
+		8224DB59257ECC510098C73D /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8224DB58257ECC510098C73D /* MainMenuScene.swift */; };
 		8251630920C7D74100A8E5F4 /* PhysicsCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8251630820C7D74100A8E5F4 /* PhysicsCategories.swift */; };
 		826213B820F7AE74001A616E /* SKTextureExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826213B720F7AE74001A616E /* SKTextureExtension.swift */; };
 		828427F920E1FE3300F5B976 /* Asteroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828427F820E1FE3300F5B976 /* Asteroid.swift */; };
@@ -27,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		82229CB620E1982300F3AA98 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		8224DB4C257EC8110098C73D /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
+		8224DB58257ECC510098C73D /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		8251630820C7D74100A8E5F4 /* PhysicsCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategories.swift; sourceTree = "<group>"; };
 		826213B720F7AE74001A616E /* SKTextureExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKTextureExtension.swift; sourceTree = "<group>"; };
 		828427F820E1FE3300F5B976 /* Asteroid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asteroid.swift; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 				82AFE40C20BBFC3B00D63569 /* AppDelegate.swift */,
 				82AFE41420BBFC3B00D63569 /* GameViewController.swift */,
 				82AFE41220BBFC3B00D63569 /* GameScene.swift */,
+				8224DB58257ECC510098C73D /* MainMenuScene.swift */,
 				82AFE41620BBFC3B00D63569 /* Main.storyboard */,
 				82AFE41920BBFC3C00D63569 /* Assets.xcassets */,
 				82AFE41B20BBFC3C00D63569 /* LaunchScreen.storyboard */,
@@ -101,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				82AFE40E20BBFC3B00D63569 /* GameScene.sks */,
+				8224DB4C257EC8110098C73D /* MainMenu.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -164,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82D6B5DF257DC7F2002A4D11 /* ToDo.rtf in Resources */,
+				8224DB4D257EC8110098C73D /* MainMenu.sks in Resources */,
 				82AFE41820BBFC3B00D63569 /* Main.storyboard in Resources */,
 				82AFE40F20BBFC3B00D63569 /* GameScene.sks in Resources */,
 				82AFE41A20BBFC3C00D63569 /* Assets.xcassets in Resources */,
@@ -184,6 +191,7 @@
 				82AFE41320BBFC3B00D63569 /* GameScene.swift in Sources */,
 				828427F920E1FE3300F5B976 /* Asteroid.swift in Sources */,
 				9718EDBC20D34D540094435E /* Hazard.swift in Sources */,
+				8224DB59257ECC510098C73D /* MainMenuScene.swift in Sources */,
 				82229CB720E1982300F3AA98 /* Enemy.swift in Sources */,
 				82AFE41520BBFC3B00D63569 /* GameViewController.swift in Sources */,
 				82BEE61B20CB4328006CDC07 /* PlayerWeapon.swift in Sources */,
