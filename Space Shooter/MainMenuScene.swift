@@ -24,7 +24,9 @@ class MainMenuScene : SKScene {
             if nodeName == "PlayButton" {
                
                 let nextScene = SKScene(fileNamed: "GameScene")
+                nextScene?.scaleMode = .aspectFill
                 self.view?.presentScene(nextScene!, transition: transition)
+                
             }
         }
     }
