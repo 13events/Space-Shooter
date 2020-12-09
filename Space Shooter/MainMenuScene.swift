@@ -18,7 +18,7 @@ class MainMenuScene : SKScene {
         let touch = touches.first
         let locationInScene = touch!.location(in: self)
         let touchedNode = self.atPoint(locationInScene)
-        let transition = SKTransition.fade(with: UIColor.black, duration: 0.5)
+        let transition = SKTransition.fade(with: UIColor.black, duration: 3.0)
         
         if let nodeName = touchedNode.name {
             if nodeName == "PlayButton" {
